@@ -1,4 +1,13 @@
-import os, sys, hashlib 
+import sys
+if sys.version_info[0] < 3:
+    raw_input("You need to run this with Python 3!\nPress Enter to exit...")
+    sys.exit(1)
+
+import os, hashlib 
+
+if not os.path.exists('tsd'):
+    input("\nERROR: Cannot find tsd folder.\n\nPress Enter to exit...")
+    sys.exit(1) 
 
 if os.path.sep == "\\":
   eol = '\n'
