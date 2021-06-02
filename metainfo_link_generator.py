@@ -28,8 +28,8 @@ config2 = configparser.ConfigParser()
 config2.optionxform = str
 
 for section in config.sections():
- if sys.argv[3] in section:
-  newsection = section.replace(sys.argv[3], sys.argv[4])
+ if "\\" + sys.argv[3] + "\\" in section:
+  newsection = section.replace("\\" + sys.argv[3] + "\\", "\\" + sys.argv[4] + "\\")
   config2.add_section(section)
   for option in config.options(section):
    config2.set(section, option.title(), config.get(section, option))
