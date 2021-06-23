@@ -35,7 +35,7 @@ for section in config.sections():
         newsection = section.replace("\\" + sys.argv[3] + "\\", "\\" + sys.argv[4] + "\\")
         if not config2.has_section(newsection):
             config2.add_section(newsection)
-            config2.set(newsection, "Link", '"' + section + '"')
+            config2.set(newsection, "Link", '"[' + section + ']"')
 
 with open(sys.argv[2], "w") as config_file:
     config2.write(config_file)
