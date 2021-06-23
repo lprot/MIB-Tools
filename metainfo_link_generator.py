@@ -14,30 +14,51 @@ if missing:
 
 import configparser, os
 
-if len(sys.argv) < 5:
-    print("Usage: " + os.path.basename(__file__) + " <inputfile> <outputfile> <ID for change> <ID to change>")
-    print("Example: " + os.path.basename(__file__) + " metainfo2.txt metainfo2.out 20 14")
-    input("\nPress Enter to exit...")
-    sys.exit(1) 
-
 config = configparser.ConfigParser()
 config.optionxform = str
-config.read(sys.argv[1])
+us = input("Do you want to convert from US to EU? Enter y if yes, or just press enter if no: ")
+print("Reading metainfo2.txt...")
+config.read("metainfo2.txt")
 
 config2 = configparser.ConfigParser()
 config2.optionxform = str
 
-for section in config.sections():
-    config2.add_section(section)
-    for option in config.options(section):
-        config2.set(section, option, config.get(section, option))
-    if "\\" + sys.argv[3] + "\\" in section:
-        newsection = section.replace("\\" + sys.argv[3] + "\\", "\\" + sys.argv[4] + "\\")
-        if not config2.has_section(newsection):
-            config2.add_section(newsection)
-            config2.set(newsection, "Link", '"[' + section + ']"')
+new_id = ""
 
-with open(sys.argv[2], "w") as config_file:
+for section in config.sections():
+    if not config2.has_section(section):
+        config2.add_section(section)
+        for option in config.options(section):
+            if option == "RequiredVersionOfDM":
+                config2.set(section, option, '"0"')
+            elif us == "y" and option.startswith("Region") and config.get(section, option) == '"Europe"':
+                config2.set(section, option, '"USA"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17214"':
+                config2.set(section, option, '"17218"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
+                config2.set(section, option, '"17219"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17216"':
+                config2.set(section, option, '"17220"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17217"':
+                config2.set(section, option, '"17221"')
+            else:
+                config2.set(section, option, config.get(section, option))
+            split_section = section.split("\\")
+            if new_id == "" and len(split_section) == 5 and split_section[0] == 'cpu' and split_section[1] == 'customerupdateinfos':
+                new_id = split_section[2]
+                print("Found ID: " + str(new_id))
+                id = input("Enter HW ID of your unit: ").strip()
+                print("Linking ID: " + str(id) + " to ID: " + str(new_id))
+        if id and new_id and "\\" + new_id + "\\" in section:
+            newsection = section.replace("\\" + new_id + "\\", "\\" + id + "\\")
+            if not config2.has_section(newsection):
+                config2.add_section(newsection)
+                config2.set(newsection, "Link", '"[' + section + ']"')
+
+with open("metainfo2.old", "w") as config_file:
+    config.write(config_file)
+
+with open("metainfo2.txt", "w") as config_file:
     config2.write(config_file)
 
 input("\nDone. Press Enter to exit...")
