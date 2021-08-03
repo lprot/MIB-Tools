@@ -19,6 +19,9 @@ config.optionxform = str
 us = input("Do you want to convert from US to EU? Enter y if yes, or just press enter if no: ")
 print("Reading metainfo2.txt...")
 config.read("metainfo2.txt")
+if len(config) == 1:
+    input("\nERROR! Cannot open metainfo2.txt. Press any key to exit...")
+    exit()
 
 config2 = configparser.ConfigParser()
 config2.optionxform = str
