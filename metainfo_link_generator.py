@@ -36,6 +36,8 @@ for section in config.sections():
                 config2.set(section, option, '"0"')
             elif us == "y" and option.startswith("Region") and config.get(section, option) == '"Europe"':
                 config2.set(section, option, '"USA"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17210"':
+                config2.set(section, option, '"17206"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17214"':
                 config2.set(section, option, '"17218"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
