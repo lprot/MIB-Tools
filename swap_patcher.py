@@ -36,7 +36,7 @@ f = open("tsd.mibstd2.system.swap.patched", 'w+b')
 f.write(data)
 f.close()
 
-if num_of_patches == num_of_applied_patches:
+if num_of_applied_patches == 4:
  print('\nAll patches are applied :)')
 else:
  print('\nWARNING! Not all patches are applied!')
