@@ -15,7 +15,7 @@ patches = ['metainfo2.txt signature (aSignatureOfMet) check', b'.\\x00\\x56\\xE3
            'metainfo2.txt signature (aParseErrorInva_1) check (1xx)', b'\\x00\\x00\\x50\\xE3\\x2D\\xFE\\xFF\\x1A\\x54\\x13\\x9F\\xE5', 0, b'\x07',
            'metainfo2.txt signature (aSignatureOfMet) check (mainstd)', b'\\x00\\x00\\x56\\xE3.\\x10\\x4B\\xE2.\\x00\\x00\\x0A', 0, b'\x07',
            'metainfo2.txt checksum (aParseErrorInva_0) check (mainstd)', b'\\xEA\\x00\\x00\\x54\\xE3..\\x00\\x1A..\\x1B\\xE5', 1, b'\x07',
-           'metainfo2.txt signature (aParseErrorInva_1) check (mainstd)', b'\\x00\\x00\\x54\\xE3.\\x00\\x00\\x1A.\\x11.\\xE5\\x45', 0, b'\x07',
+           'metainfo2.txt signature (aParseErrorInva_1) check (mainstd)', b'\\xE2..\\xFE\\xEB\\x00\\x00\\x54\\xE3.\\x00\\x00\\x1A.\\x11.\\xE5', 0, b'\x07',
            'Dependencies of update not met (aDependenciesOf) check (mainstd)', b'\\x00\\x00\\x50\\xE3\\x3D\\x00\\x00\\x1A\\x04\\x00\\x80\\xE2', 0, b'\x07']
 
 f = open('tsd.mibstd2.system.swdownload', 'rb')
