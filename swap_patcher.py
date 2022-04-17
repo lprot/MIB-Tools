@@ -16,9 +16,9 @@ patches = ['Setting RPMB key check', b'\\xEB\\x00\\x00\\x50\\xE3\\x25\\x00\\x00\
            'VCRN matching check', b'\\x00\\x00\\x54\\xE3\\x55\\x00\\x00\\x1A', 0, b'\x07',
            'Exception list signature check (patched)', b'\\xEB\\x00\\x00\\x50\\xE3\\x8A\\x00\\x00\\x1A\\xB8', 8, b'\xE3',
            'Setting the RPMB key check (mainstd)', b'\\xEB\\x00\\x00\\x50\\xE3\\x3C\\x10\\x84\\xE2\\x13', 1, b'\x07',
-           'Exception list signature check (mainstd)', b'\\x00\\x00\\x50\\xE3\\x15\\x00\\x00\\x1A\\xA0', 0, b'\x07',
-           'SWaP signature check (mainstd)', b'\\xEB\\x00\\x00\\x50\\xE3\\x6F\\x00\\x00\\x1A', 1, b'\x07',
-           'VCRN matching check (mainstd)', b'\\x00\\x00\\x54\\xE3\\x56\\x00\\x00\\x1A', 0, b'\x07']
+           'Exception list signature check (mainstd)', b'\\x00\\x00\\x50\\xE3\\x15\\x00\\x00\\x1A...\\xE2...\\xE1', 0, b'\x07',
+           'SWaP signature check (mainstd)', b'\\x2F\\x4B\\xE2...\\xEB\\x00\\x00\\x50\\xE3.\\x00\\x00\\x1A', 7, b'\x07',
+           'VCRN matching check (mainstd)', b'\\xFF\\xEA\\x00\\x00\\x54\\xE3.\\x00\\x00\\x1A', 2, b'\x07']
 
 f = open('tsd.mibstd2.system.swap', 'rb')
 data = bytearray(f.read())
