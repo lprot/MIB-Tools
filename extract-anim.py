@@ -34,11 +34,50 @@ def extract(filename, out_dir):
 
     (magic,) = struct.unpack_from('<8s', data, offset)
     offset += 12
-    (cmdblock_len,) = struct.unpack_from('<L', data, offset)
-    offset += cmdblock_len + 16
+    (cmd_block_len,) = struct.unpack_from('<L', data, offset)
+    offset += cmd_block_len + 16
     (number_of_files,) = struct.unpack_from('<L', data, offset)
-    print ("Command block length: %d. Number of files: %d" %(cmdblock_len, number_of_files))
+    print ("Command block length: %d. Number of files: %d" %(cmd_block_len, number_of_files))
 
+    # extracting command list
+    cmd_offset = 20
+    i = 0
+    num_blocks = cmd_block_len / 32
+    print("Number of commands in command list: %d. Extracting to animation_script.csv..." % num_blocks)
+    f_commands = open(os.path.join(out_dir, 'animation_script.csv'), 'wt')
+    while i < num_blocks:
+        (nn,cmd,arg1,arg2,arg3,arg4,arg5,arg6) = struct.unpack_from('<IIIIIIII', data, cmd_offset)
+        match cmd:
+            case 0:
+                comment = 'BEGIN'
+            case 1:
+                comment = 'END'
+            case 2:
+                comment = 'CLEAR SCREEN'
+            case 3:
+                comment = 'SET RESOLUTION '+str(arg3).zfill(2)+'x'+str(arg4)
+            case 4:
+                comment = 'DRAW img_'+str(arg1).zfill(2)+' at x='+str(arg3)+', y='+str(arg4)
+            case 5:
+                comment = 'DRAW STICKER img_'+str(arg1).zfill(2)+' at x='+str(arg3)+', y='+str(arg4)
+            case 6:
+                comment = 'WAIT '+str(arg1*0.01)+' sec.'
+            case 7:
+                comment = 'START/END ANIMATION'
+            case 10:
+                comment = 'IF STICKER='+str(arg2)+' THEN'
+            case 11:
+                comment = 'ELSE'
+            case 12:
+                comment = 'ENDIF'
+            case _:
+                comment = 'UNKNOWN'
+        f_commands.write("{};{};{};{};{};{};{};{};{}\n".format(nn,cmd,arg1,arg2,arg3,arg4,arg5,arg6,comment).replace("4294967295",""))
+        cmd_offset += 32
+        i += 1
+    f_commands.close()
+
+    #extracting images
     i = j = 0
     offset += 4
     offsets_array = []
