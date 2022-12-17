@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-#--- Quick 'n' dirty nds2sqlite converter
+#--- Quick 'n' dirty converter of *.nds and *.db to *.sqlite
 #
 # Author: lprot
 # Version: 1
