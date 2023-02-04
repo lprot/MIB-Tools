@@ -16,7 +16,7 @@ import configparser, os
 
 config = configparser.ConfigParser()
 config.optionxform = str
-us = input("Do you want to convert from US to EU? Enter y if yes, or just press enter if no: ")
+us = input("Do you want to convert US(NAR)/CN/JP/KR(RoW) to EU unit? Enter y if yes, or just press enter if no: ")
 print("Reading metainfo2.txt...")
 config.read("metainfo2.txt")
 if len(config) == 1:
@@ -36,16 +36,18 @@ for section in config.sections():
                 config2.set(section, option, '"0"')
             elif us == "y" and option.startswith("Region") and config.get(section, option) == '"Europe"':
                 config2.set(section, option, '"USA"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17206"':
-                config2.set(section, option, '"17210"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17214"':
                 config2.set(section, option, '"17218"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
-                config2.set(section, option, '"17219"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17216"':
                 config2.set(section, option, '"17220"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17217"':
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17226"':
+                config2.set(section, option, '"17219"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17225"':
                 config2.set(section, option, '"17221"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17217"':
+                config2.set(section, option, '"17222"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
+                config2.set(section, option, '"17223"')
             else:
                 config2.set(section, option, config.get(section, option))
             split_section = section.split("\\")
@@ -59,6 +61,9 @@ for section in config.sections():
             if not config2.has_section(newsection):
                 config2.add_section(newsection)
                 config2.set(newsection, "Link", '"[' + section + ']"')
+
+if us == "y":
+    print "\nIMPORTANT! This metainfo2.txt can only be used on US(NAR)/CN/JP/KR(RoW) unit for covertion to EU unit!"
 
 with open("metainfo2.old", "w") as config_file:
     config.write(config_file)
