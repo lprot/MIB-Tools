@@ -12,7 +12,7 @@ if missing:
     python = sys.executable
     subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
 
-import configparser, os
+import configparser, os, stat
 
 config = configparser.ConfigParser()
 config.optionxform = str
@@ -68,6 +68,7 @@ if us == "y":
 with open("metainfo2.old", "w") as config_file:
     config.write(config_file)
 
+os.chmod("metainfo2.txt", stat.S_IWRITE)
 with open("metainfo2.txt", "w") as config_file:
     config2.write(config_file)
 
