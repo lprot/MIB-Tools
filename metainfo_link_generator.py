@@ -35,7 +35,10 @@ for section in config.sections():
             if option == "RequiredVersionOfDM":
                 config2.set(section, option, '"0"')
             elif us == "y" and option.startswith("Region") and config.get(section, option) == '"Europe"':
-                config2.set(section, option, '"USA"')
+                config2.set(section, "Region", '"Europe"')
+                config2.set(section, "Region2", '"RoW"')
+                config2.set(section, "Region3", '"USA"')
+                config2.set(section, "Region4", '"CN"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17214"':
                 config2.set(section, option, '"17218"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17216"':
