@@ -61,7 +61,7 @@ for section in config.sections():
             if new_id == "" and len(split_section) == 5 and split_section[0] == 'cpu' and split_section[1] == 'customerupdateinfos':
                 new_id = split_section[2]
                 print("Found ID: " + str(new_id))
-                id = input('Enter SWDL HwVersion of your unit: ').strip()
+                id = input('Enter SWDL HwVersion of your unit (you can find it in mibstd2_toolbox>mib_info): ').strip()
                 print("Linking ID: " + str(id) + " to ID: " + str(new_id))
         if id and new_id and "\\" + new_id + "\\" in section:
             newsection = section.replace("\\" + new_id + "\\", "\\" + id + "\\")
@@ -71,7 +71,7 @@ for section in config.sections():
 
 if us == "y":
     print("\nIMPORTANT! This metainfo2.txt can only be used on US(NAR)/CN/JP/KR(RoW) unit for covertion to EU unit!")
-    print("Don't forget run mibstd2_toolbox>Tools>Patch tsd.mibstd2.system.swdownload to accept any metainfo2.txt!!!")
+    print("Don't forget to run mibstd2_toolbox>Tools>Patch tsd.mibstd2.system.swdownload to accept any metainfo2.txt!!!")
 
 with open("metainfo2.old", "w") as config_file:
     config.write(config_file)
