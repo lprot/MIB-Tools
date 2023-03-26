@@ -59,7 +59,7 @@ for section in config.sections():
             if new_id == "" and len(split_section) == 5 and split_section[0] == 'cpu' and split_section[1] == 'customerupdateinfos':
                 new_id = split_section[2]
                 print("Found ID: " + str(new_id))
-                id = input('Enter HW ID of your unit (if you use hwVersion from "Toolbox>mib_info" then add +1): ').strip()
+                id = input('Enter SWDL HwVersion of your unit: ').strip()
                 print("Linking ID: " + str(id) + " to ID: " + str(new_id))
         if id and new_id and "\\" + new_id + "\\" in section:
             newsection = section.replace("\\" + new_id + "\\", "\\" + id + "\\")
