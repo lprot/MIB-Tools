@@ -1,7 +1,7 @@
 import os, sys
 
-def convert(filename, out_dir):
-    print('Processing: ' + os.path.splitext(filename)[0] + '.txt')
+def convert(filename):
+    print('Processing: ' + filename)
     txtFile = open(os.path.splitext(filename)[0] + '.txt', 'r')
     Lines = txtFile.readlines()
     print('Writing to: ' + os.path.splitext(filename)[0] + '.bin')
@@ -17,9 +17,11 @@ match len(sys.argv):
     case 2:
         convert(sys.argv[1], '.\\' + os.path.splitext(sys.argv[1])[0])
     case 1:
-        for filename in os.scandir('.\\'):
-            if filename.is_file() and filename.name.endswith('.txt'):
-                convert(filename.name, os.path.splitext(filename)[0])
+        for root, dirs, files in os.walk("."):
+            path = root.split(os.sep)
+            for file in files:
+                if (root+file).endswith('.txt'):
+                        convert(root+'\\'+file)
     case _:
         print("Usage: eeprom2bin.py <filename>")
         print("   or: eeprom2bin.py")
