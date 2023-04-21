@@ -71,7 +71,7 @@ for section in config.sections():
 
 if us == "y":
     print("\nIMPORTANT! This metainfo2.txt can only be used on US(NAR)/CN/JP/KR(RoW) unit for convertion to EU unit!")
-    print("Don't forget to run mibstd2_toolbox>Tools>Patch tsd.mibstd2.system.swdownload to accept any metainfo2.txt!!!")
+    print("Before starting the update, run mibstd2_toolbox>Tools>Patch tsd.mibstd2.system.swdownload to accept any metainfo2.txt!!!")
 
 with open("metainfo2.old", "w") as config_file:
     config.write(config_file)
