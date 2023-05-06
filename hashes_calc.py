@@ -20,16 +20,22 @@ for dirpath, dirs, files in os.walk('tsd'):
     fname = os.path.join(dirpath,filename)
     with open(fname, 'rb') as f:
       if fout.tell():
-        fout.write(eol + eol)
+        fout.write(eol)
       fout.write('FileName = "/' + fname.replace(os.path.sep, '/') + '"' + eol)
       fout.write('FileSize = "' + str(os.stat(fname).st_size) + '"' + eol)
-      sha1 = hashlib.sha1()
+      i=0
       while True:
-        data = f.read(65536) #BUF_SIZE
+        sha1 = hashlib.sha1()
+        data = f.read(524288) #BUF_SIZE
         if not data:
          break
         sha1.update(data)
-      fout.write('Checksum = "' + sha1.hexdigest() + '"')
+        if i>0:
+            n = str(i)
+        else:
+            n =''
+        fout.write('Checksum'+ n + ' = "' + sha1.hexdigest() + '"' + eol)
+        i+=1
 if fout.tell():
  print('hashes.txt is recalculated :)')
 else:
