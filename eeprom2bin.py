@@ -15,7 +15,7 @@ def convert(filename):
 
 match len(sys.argv):
     case 2:
-        convert(sys.argv[1], '.\\' + os.path.splitext(sys.argv[1])[0])
+        convert('.\\' + os.path.splitext(sys.argv[1])[0])
     case 1:
         for root, dirs, files in os.walk("."):
             path = root.split(os.sep)
