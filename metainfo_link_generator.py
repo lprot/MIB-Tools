@@ -55,6 +55,8 @@ for section in config.sections():
                 config2.set(section, option, '"17210"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17224"':
                 config2.set(section, option, '"17212"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17205"':
+                config2.set(section, option, '"17213"')
             else:
                 config2.set(section, option, config.get(section, option))
             split_section = section.split("\\")
