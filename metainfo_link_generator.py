@@ -51,6 +51,8 @@ for section in config.sections():
                 config2.set(section, option, '"17222"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
                 config2.set(section, option, '"17223"')
+            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17204"':
+                config2.set(section, option, '"17208"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17206"':
                 config2.set(section, option, '"17210"')
             elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17224"':
