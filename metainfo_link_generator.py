@@ -1,4 +1,4 @@
-import sys
+import sys, os
 if sys.version_info[0] < 3:
     raw_input("You need to run this with Python 3!\nPress Enter to exit...")
     sys.exit(1)
@@ -9,14 +9,18 @@ installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
 if missing:
-    python = sys.executable
-    subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+    try:
+        python = sys.executable
+        subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+    except:
+        input("ERROR! Installation of %s failed!\nPress Enter to exit..." % required)
+        sys.exit(1)
 
 import configparser, os, stat
 
 config = configparser.ConfigParser()
 config.optionxform = str
-us = input("Do you want to convert US(NAR)/CN/JP/KR(RoW) to EU unit? Enter y if yes, or just press enter if no: ")
+us = input("\nDo you want to convert US(NAR)/CN/JP/KR(RoW) to EU unit? Enter y if yes, or just press enter if no: ")
 print("Reading metainfo2.txt...")
 config.read("metainfo2.txt")
 if len(config) == 1:
