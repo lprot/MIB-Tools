@@ -30,36 +30,38 @@ config2.optionxform = str
 
 new_id = ""
 
+yes = ['y', 'yes', 'Y', 'YES']
+
 for section in config.sections():
     if not config2.has_section(section):
         config2.add_section(section)
         for option in config.options(section):
             if option == "RequiredVersionOfDM":
                 config2.set(section, option, '"0"')
-            elif us == "y" and option.startswith("Region") and config.get(section, option) == '"Europe"':
+            elif us in yes and option.startswith("Region") and config.get(section, option) == '"Europe"':
                 config2.set(section, "Region", '"Europe"')
                 config2.set(section, "Region2", '"RoW"')
                 config2.set(section, "Region3", '"USA"')
                 config2.set(section, "Region4", '"CN"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17214"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17214"':
                 config2.set(section, option, '"17218"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17216"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17216"':
                 config2.set(section, option, '"17220"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17226"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17226"':
                 config2.set(section, option, '"17219"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17225"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17225"':
                 config2.set(section, option, '"17221"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17217"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17217"':
                 config2.set(section, option, '"17222"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17215"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17215"':
                 config2.set(section, option, '"17223"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17204"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17204"':
                 config2.set(section, option, '"17208"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17206"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17206"':
                 config2.set(section, option, '"17210"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17224"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17224"':
                 config2.set(section, option, '"17212"')
-            elif us == "y" and option.startswith("Variant") and config.get(section, option) == '"17205"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17205"':
                 config2.set(section, option, '"17213"')
             else:
                 config2.set(section, option, config.get(section, option))
@@ -75,7 +77,7 @@ for section in config.sections():
                 config2.add_section(newsection)
                 config2.set(newsection, "Link", '"[' + section + ']"')
 
-if us == "y":
+if us in yes:
     print("\nIMPORTANT! This metainfo2.txt can only be used on US(NAR)/CN/JP/KR(RoW) unit for convertion to EU unit!")
     print("Before starting the update, run mibstd2_toolbox>Tools>Patch tsd.mibstd2.system.swdownload to accept any metainfo2.txt!!!")
 
