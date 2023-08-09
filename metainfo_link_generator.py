@@ -3,20 +3,18 @@ if sys.version_info[0] < 3:
     raw_input("You need to run this with Python 3!\nPress Enter to exit...")
     sys.exit(1)
 
-import subprocess, pkg_resources
-required = {'configparser'}
-installed = {pkg.key for pkg in pkg_resources.working_set}
-missing = required - installed
-
-if missing:
+import subprocess
+try:
+    import configparser
+except:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'configparser'], stdout=subprocess.DEVNULL)
     try:
-        python = sys.executable
-        subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
+        import configparser
     except:
         input("ERROR! Installation of %s failed!\nPress Enter to exit..." % required)
         sys.exit(1)
 
-import configparser, os, stat
+import stat
 
 config = configparser.ConfigParser()
 config.optionxform = str
