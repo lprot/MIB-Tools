@@ -1,8 +1,11 @@
 import os, sys, gzip, shutil, sqlite3
 
-with gzip.open('vip_sys_db.sql.gz', 'rb') as f_in:
-    with open('vip_sys_db.sql', 'wb') as f_out:
-        shutil.copyfileobj(f_in, f_out)
+try:
+    with gzip.open('vip_sys_db.sql.gz', 'rb') as f_in:
+        with open('vip_sys_db.sql', 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+except:
+    print("vip_sys_db.sql.gz not found. Will try to open the unpacked one.")
 
 con = sqlite3.connect("vip_sys_db.sql")
 

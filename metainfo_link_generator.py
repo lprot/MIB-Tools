@@ -59,7 +59,7 @@ for section in config.sections():
                 config2.set(section, option, '"17208"')
             elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17206"':
                 config2.set(section, option, '"17210"')
-            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17224"':
+            elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17207"':
                 config2.set(section, option, '"17212"')
             elif us in yes and option.startswith("Variant") and config.get(section, option) == '"17205"':
                 config2.set(section, option, '"17213"')
