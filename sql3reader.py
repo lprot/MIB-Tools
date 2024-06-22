@@ -40,5 +40,13 @@ res = cur.execute("SELECT obj_id, obj_data FROM vipDB WHERE obj_id=139")
 obj_id, obj_data = res.fetchone()
 print("Coding: %s" % obj_data.hex().upper())
 
+res = cur.execute("SELECT obj_id, obj_data FROM vipDB WHERE obj_id=33")
+obj_id, obj_data = res.fetchone()
+print("Dataset 280 (default languages): %s" % obj_data.hex().upper()[0x45*2:0x5B*2])
+
+res = cur.execute("SELECT obj_id, obj_data FROM vipDB WHERE obj_id=37")
+obj_id, obj_data = res.fetchone()
+print("Dataset 2D00 (HMI languages): %s" % obj_data.hex().upper()[8:786])
+
 input("\nPress Enter to exit...")
 sys.exit(1)

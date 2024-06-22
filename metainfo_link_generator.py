@@ -84,7 +84,7 @@ if us in yes:
 with open("metainfo2.old", "w") as config_file:
     config.write(config_file)
 
-os.chmod("metainfo2.txt", stat.S_IWRITE)
+os.chmod("metainfo2.txt", 0o777)
 with open("metainfo2.txt", "w") as config_file:
     config2.write(config_file)
 
