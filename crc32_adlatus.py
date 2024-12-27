@@ -1,5 +1,13 @@
 #as per https://www.drive2.com/l/605899902332985777/
-import argparse, crcmod, sys
+import argparse, sys
+try:
+    import crcmod
+except ImportError:
+    print("  crcmod module is missing!\n"
+          "  install it by running:\n"
+          "  pip3 install crcmod")
+    input("\nPress Enter to exit...")
+    sys.exit(1)
 parser = argparse.ArgumentParser()
 parser.add_argument("filename")
 data = open(parser.parse_args().filename, 'rb').read()
